@@ -1,7 +1,13 @@
 {
-  "author": "Brian Kirchoff <briankircho@gmail.com>",
-  "name": "mongoose-tree",
-  "description": "Materialized path hierarchy for mongoose",
+  "author": "Lourenzo Ferreira <lourenzo@gmail.com> (http://lourenzo.blog.br)",
+  "name": "mongoose-reparenting-tree",
+
+  "description": "Materialized path hierarchy with cascade child re-parenting on delete for mongoose",
+
+  "contributors": [
+    "Brian Kirchoff <briankircho@gmail.com>"
+  ],
+
   "homepage": "https://github.com/briankircho/mongoose-tree",
   "repository": {
     "type": "git",

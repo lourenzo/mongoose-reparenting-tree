@@ -1,6 +1,6 @@
 ## mongoose-tree
 
-Implements the materialized path strategy for storing a hierarchy of documents with mongoose
+Implements the materialized path strategy with cascade child re-parenting on delete for storing a hierarchy of documents with mongoose
 
 # Usage
 
