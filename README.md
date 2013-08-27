@@ -1,4 +1,4 @@
-## mongoose-tree
+## mongoose-reparenting-tree
 
 Implements the materialized path strategy with cascade child re-parenting on delete for storing a hierarchy of documents with mongoose
 
@@ -7,6 +7,15 @@ Implements the materialized path strategy with cascade child re-parenting on del
 Install via NPM
 
     $ npm install mongoose-tree
+
+## Options
+
+```javascript
+Model.plugin(tree, {
+  pathSeparator : '#' // Default path separator
+  onDelete :  'REPARENT' // Can be set to 'DELETE' or 'REPARENT'. Default: 'REPARENT'
+})
+```
 
 Then you can use the plugin on your schemas
 
@@ -56,13 +65,6 @@ At this point in mongoDB you will have documents similar to
 
 The path is used for recursive methods and is kept up to date by the plugin if the parent is changed
 
-## Options
-
-```javascript
-Model.plugin(tree, {
-  pathSeparator : '#' // Default path separator
-})
-```
 
 # API
 
