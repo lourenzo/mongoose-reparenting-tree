@@ -23,10 +23,10 @@ describe('tree tests', function() {
       should.not.exist(err);
 
       var adam = new User({ 'name' : 'Adam' });
-      var bob = new User({ 'name' : 'Bob', 'parent' : adam });
-      var carol = new User({ 'name' : 'Carol', 'parent' : adam });
-      var dann = new User({ 'name' : 'Dann', 'parent' : carol });
-      var emily = new User({ 'name' : 'Emily', 'parent' : dann });
+        var bob = new User({ 'name' : 'Bob', 'parent' : adam });
+        var carol = new User({ 'name' : 'Carol', 'parent' : adam });
+          var dann = new User({ 'name' : 'Dann', 'parent' : carol });
+            var emily = new User({ 'name' : 'Emily', 'parent' : dann });
 
       async.forEachSeries([adam, bob, carol, dann, emily], function(doc, cb) {
         doc.save(cb);
@@ -54,40 +54,6 @@ describe('tree tests', function() {
         names['Dann'].path.should.equal(expectedPath);
 
         done();
-      });
-    });
-  });
-
-  describe('removing document', function() {
-    it('should remove leaf nodes', function(done) {
-      User.findOne({ name : 'Emily' }, function(err, emily) {
-        emily.remove(function(err) {
-          should.not.exist(err);
-
-          User.find(['name'], function(err, users) {
-            should.not.exist(err);
-            users.length.should.equal(4);
-            _.pluck(users, 'name').should.not.include('Emily');
-            done();
-          });
-        });
-      });
-    });
-    it('should remove all children', function(done) {
-      User.findOne({ name : 'Carol' }, function(err, user) {
-        should.not.exist(err);
-
-        user.remove(function(err) {
-          should.not.exist(err);
-
-          User.find(['name'], function(err, users) {
-            should.not.exist(err);
-
-            users.length.should.equal(2);
-            _.pluck(users, 'name').should.include('Adam').and.include('Bob');
-            done();
-          });
-        });
       });
     });
   });
@@ -189,5 +155,51 @@ describe('tree tests', function() {
       });
     });
   });
+
+  describe('removing document', function() {
+    it('should remove leaf nodes', function(done) {
+      User.findOne({ name : 'Emily' }, function(err, emily) {
+        emily.remove(function(err) {
+          should.not.exist(err);
+
+          User.find(['name'], function(err, users) {
+            should.not.exist(err);
+            users.length.should.equal(4);
+            _.pluck(users, 'name').should.not.include('Emily');
+            done();
+          });
+        });
+      });
+    });
+    it('should reparent all children', function(done) {
+      User.findOne({ name : 'Carol' }, function(err, user) {
+        should.not.exist(err);
+
+        user.remove(function(err) {
+          should.not.exist(err);
+
+          User.find(['name'], function(err, users) {
+            should.not.exist(err);
+
+            // redesign this part of test
+            users.length.should.equal(4);
+            _.pluck(users, 'name').should.include('Adam').and.include('Bob').and.include('Dann').and.include('Emily');
+            done();
+          });
+
+          User.find({}, function(err, users){
+            should.not.exist(err);
+
+            //console.log(users);
+
+          })
+
+        });
+
+
+      });
+    });
+  });
+
 
 });
