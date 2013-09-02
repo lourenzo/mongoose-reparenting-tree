@@ -6,7 +6,7 @@ Implements the materialized path strategy with cascade child re-parenting on del
 
 Install via NPM
 
-    $ npm install mongoose-tree
+    $ npm install mongoose-reparenting-tree
 
 ## Options
 
