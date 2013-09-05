@@ -1,4 +1,6 @@
-## mongoose-reparenting-tree
+[![Build Status](https://secure.travis-ci.org/lourenzo/mongoose-reparenting-tree.png?branch=master)](http://travis-ci.org/lourenzo/mongoose-reparenting-tree)
+
+## mongoose-reparenting-tree 
 
 Implements the materialized path strategy with cascade child re-parenting on delete for storing a hierarchy of documents with mongoose
 
